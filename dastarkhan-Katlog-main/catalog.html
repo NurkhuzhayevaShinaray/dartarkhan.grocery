@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dastarkhan - Каталог</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styleNurislam.css">
+  <style>
+html.dark-mode body { background:#1b1b1b !important; color:#fff !important; }
+html.dark-mode main { background:#1e1e1e !important; border-color:#2a2a2a !important; }
+
+html.dark-mode h2 { 
+  color:#b5f0b5 !important; 
+  border-bottom:1px solid #3a3a3a !important; 
+}
+html.dark-mode h3 { color:#d7ffd7 !important; }
+
+html.dark-mode input,
+html.dark-mode textarea,
+html.dark-mode select {
+  background:#2b2b2b !important;
+  color:#fff !important;
+  border:1px solid #555 !important;
+  border-radius:6px;
+  transition:background .2s, color .2s, border-color .2s;
+}
+html.dark-mode input::placeholder,
+html.dark-mode textarea::placeholder { color:#aaaaaa !important; }
+html.dark-mode input:focus,
+html.dark-mode textarea:focus,
+html.dark-mode select:focus {
+  background:#383838 !important;
+  border-color:#66e087 !important;
+  outline:none !important;
+}
+
+html.dark-mode button,
+html.dark-mode .btn {
+  background:green !important;
+  color:#fff !important;
+  border:1px solid #565656 !important;
+}
+html.dark-mode button:hover,
+html.dark-mode .btn:hover { background:#4a4a4a !important; }
+
+html.dark-mode .sale-banner {
+  background:#2b2b2b !important;
+  color:#fff !important;
+  border:1px solid #444 !important;
+}
+html.dark-mode .sale-banner h3,
+html.dark-mode .sale-banner p { color:#fff !important; }
+html.dark-mode .sale-banner strong { color:#66e087 !important; }
+
+html.dark-mode .product {
+  background:#2e2e2e !important;
+  border:1px solid #444 !important;
+  color:#fff !important;
+}
+html.dark-mode .product h4 { color:#fff !important; }
+html.dark-mode .price { color:#66e087 !important; }
+html.dark-mode .old-price { color:#bdbdbd !important; }
+
+.main-content {
+  display:flex; flex-direction:column; align-items:center;
+}
+.sale-banner { width:min(900px,100%); margin:15px auto; }
+.products-container { justify-content:center; }
+@media (max-width:768px){ .sale-banner{ width:100%; } }
+
+.search-form { display:flex; align-items:center; gap:10px; }
+  .suggestions{ list-style:none; margin:0 0 0 10px; padding:0; }
+
+.subscription-form-container{
+  display:flex; flex-direction:column; align-items:center; text-align:center;
+}
+#subscriptionForm{ width:100%; max-width:400px; }
+.subscription-form-container .form-controls{
+  display:flex; justify-content:center; gap:10px; margin-top:10px;
+}
+</style>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="img/photo_5359674248727231556_m.jpg" alt="Логотип">
+      <h1>Dastarkhan</h1>
+    </div>
+ <button class="burger" aria-label="Меню">
+      <i class="fa fa-bars" style="justify-content: right;"></i>
+    </button>
+
+    <nav>
+      <a href="index.html">Главная</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="sales.html">Скидки</a>
+      <a href="delivery.html">Доставка</a>
+      <a href="reviews.html">Отзывы</a>
+      <a href="contacts.html">Контакты</a>
+      <a href="questions.html">Вопросы</a>
+      <a href="auth.html">Авторизация</a>
+    </nav>
+
+    <div class="theme-btn">
+      <button id="theme-btn" aria-label="Toggle dark mode">🌙</button>
+    </div>
+  </header>
+
+  <main style="display: flex; flex-direction: column;">
+      <div class="food-section">
+        <h2>Поиск рецептов</h2>
+         <div class="search-box" style="display: flex; justify-self: center;">
+          <input type="text" id="mealSearch" placeholder="Введите название блюда">
+          <button id="searchMeal">Найти</button>
+        </div>
+        <div id="mealResult"></div>
+      </div>
+
+
+    <h2>Каталог продуктов</h2>
+
+    <div class="search-section">
+      <h3 style="display: flex; justify-self: center;">Поиск продуктов</h3>
+      <form class="search-form" style="display: flex; justify-self: center;">
+        <input type="text" id="searchInput" placeholder="Введите название продукта">
+        <button type="button">Найти</button>
+      </form>
+ 
+      
+      <div class="filter-section">
+        <h3>Фильтр продуктов</h3>
+        <div class="filter-controls">
+          <select id="categoryFilter">
+            <option value="all">Все категории</option>
+            <option value="fruits">Фрукты</option>
+            <option value="vegetables">Овощи</option>
+            <option value="dairy">Молочные</option>
+          </select>
+          <input type="number" id="priceFilter" placeholder="Макс. цена" value="2000">
+          <button id="applyFilter">Применить</button>
+        </div>
+      </div>
+    </div>
+
+    <h3>Фрукты</h3>
+    <div class="products-container" style="display: flex; justify-content: center;">
+      <div class="product">
+        <img src="img/banana.webp" alt="Бананы">
+        <h4>Бананы</h4>
+        <p class="price">1180 KZT/кг</p>
+        <div class="stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <form class="product-form">
+          <input type="number" min="1" value="1">
+          <button type="submit">В корзину</button>
+        </form>
+      </div>
+
+      <div class="product">
+        <img src="img/oranges.jpg" alt="Апельсины">
+        <h4>Апельсины</h4>
+        <p class="price">1100 KZT/кг</p>
+        <div class="stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <form class="product-form">
+          <input type="number" min="1" value="1">
+          <button type="submit">В корзину</button>
+        </form>
+      </div>
+
+      <div class="product">
+        <img src="img/watermelon.avif" alt="Арбузы">
+        <h4>Арбузы</h4>
+        <p class="price">880 KZT/кг</p>
+        <div class="stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <form class="product-form">
+          <input type="number" min="1" value="1">
+          <button type="submit">В корзину</button>
+        </form>
+      </div>
+
+      <div class="product">
+        <img src="img/apples.jpg" alt="Яблоки">
+        <h4>Яблоки</h4>
+        <p class="price">850 KZT/кг</p>
+        <div class="stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <form class="product-form">
+          <input type="number" min="1" value="1">
+          <button type="submit">В корзину</button>
+        </form>
+      </div>
+    </div>
+
+    <h3>Овощи</h3>
+    <div class="products-container" style="display: flex; justify-content: center;">
+      <div class="product">
+        <img src="img/огурцы.jpg" alt="Огурцы">
+        <h4>Огурцы</h4>
+        <p class="price">890 KZT/кг</p>
+        <div class="stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <form class="product-form">
+          <input type="number" min="1" value="1">
+          <button type="submit">В корзину</button>
+        </form>
+      </div>
+
+      <div class="product">
+        <img src="img/помидоры.webp" alt="Помидоры">
+        <h4>Помидоры</h4>
+        <p class="price">950 KZT/кг</p>
+        <div class="stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <form class="product-form">
+          <input type="number" min="1" value="1">
+          <button type="submit">В корзину</button>
+        </form>
+      </div>
+
+      <div class="product">
+        <img src="img/картофель.jpg" alt="Картофель">
+        <h4>Картофель</h4>
+        <p class="price">450 KZT/кг</p>
+        <div class="stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <form class="product-form">
+          <input type="number" min="1" value="1">
+          <button type="submit">В корзину</button>
+        </form>
+      </div>
+
+      <div class="product">
+        <img src="img/морковь.webp" alt="Морковь">
+        <h4>Морковь</h4>
+        <p class="price">370 KZT/кг</p>
+        <div class="stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <form class="product-form">
+          <input type="number" min="1" value="1">
+          <button type="submit">В корзину</button>
+        </form>
+      </div>
+    </div>
+
+    <h3>Молочные продукты</h3>
+    <div class="products-container" style="display: flex; justify-content: center;">
+      <div class="product">
+        <img src="img/молоко.png" alt="Молоко">
+        <h4>Молоко</h4>
+        <p class="price">750 KZT/л</p>
+        <div class="stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <form class="product-form">
+          <input type="number" min="1" value="1">
+          <button type="submit">В корзину</button>
+        </form>
+      </div>
+
+      <div class="product">
+        <img src="img/сметана.webp" alt="Сметана">
+        <h4>Сметана</h4>
+        <p class="price">950 KZT/мл</p>
+        <div class="stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <form class="product-form">
+          <input type="number" min="1" value="1">
+          <button type="submit">В корзину</button>
+        </form>
+      </div>
+
+      <div class="product">
+        <img src="img/творог.jpeg" alt="Творог">
+        <h4>Творог</h4>
+        <p class="price">845 KZT/кг</p>
+        <div class="stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <form class="product-form">
+          <input type="number" min="1" value="1">
+          <button type="submit">В корзину</button>
+        </form>
+      </div>
+
+      <div class="product">
+        <img src="img/сыр.jpg" alt="Сыр">
+        <h4>Сыр</h4>
+        <p class="price">1380 KZT/кг</p>
+        <div class="stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <form class="product-form">
+          <input type="number" min="1" value="1">
+          <button type="submit">В корзину</button>
+        </form>
+      </div>
+    </div>
+    <p><br>
+    <div class="cart-section" style="display: flex; justify-content: center;">
+      <h3>Корзина:     </h3> 
+      <div class="cart-summary">
+        <p>Товаров в корзине: <span id="cartCount">0</span></p>
+        <p>Общая сумма: <span id="cartTotal">0</span> KZT</p>
+        <button class="checkout-btn">Оформить заказ</button>
+      </div>
+    </div> </p>
+  </main>
+
+  <footer>
+    <p>Сделано командой: Nurislam, Shinaray, Aidos, Akerke</p>
+  </footer>
+
+  <script src="catolog.js"></script>
+</body>
+</html>
