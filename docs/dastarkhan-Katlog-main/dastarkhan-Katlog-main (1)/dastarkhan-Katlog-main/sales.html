@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dastarkhan - Скидки</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styleNurislam.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <style>
+  .burger {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 26px;
+    color: white;
+    cursor: pointer;
+    padding: 6px 10px;
+  }
+  .burger i { display: inline-block; }
+
+  nav.nav-links {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  nav.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+  }
+  nav.nav-links a:hover { background-color: #4CAF50; }
+  nav.nav-links a.active { background-color: #2E7D32; }
+
+  .dark-mode .sale-banner{
+    background:#2b2b2b !important;
+    color:#fff !important;
+    border:1px solid #444;
+  }
+  .dark-mode .sale-banner h3,
+  .dark-mode .sale-banner p{
+    color:#fff !important;
+  }
+  .dark-mode .sale-banner strong{
+    color:#66e087 !important;
+  }
+
+  .dark-mode .product{
+    background:#2e2e2e;
+    border:1px solid #444;
+    color:#fff;
+  }
+  .dark-mode .product h4{ color:#fff; }
+  .dark-mode .price{ color:#66e087; }
+  .dark-mode .old-price{ color:#bdbdbd; }
+  .dark-mode h2, .dark-mode h3 { color:#9be29b; }
+
+  .subscribe-section img{
+    max-width: 100% !important;   
+    height: auto !important;      
+    display: block;
+    border-radius: 10px;
+    margin: 0 auto 12px;          
+  }
+
+  .main-content{
+    display:flex;
+    flex-direction:column;
+    align-items:center; 
+  }
+  .sale-banner{
+    width: min(900px, 100%);
+    margin: 15px auto;  
+  }
+
+  .products-container{
+    justify-content:center;
+  }
+  .subscription-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;   
+    text-align: center;
+    margin-top: 20px;
+  }
+  #subscriptionForm {
+    width: 100%;
+    max-width: 400px; 
+  }
+  .subscription-form-container .form-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  @media (max-width: 600px) {
+    #subscriptionForm { max-width: 90%; }
+  }
+
+
+  @media (max-width: 768px){
+    .sale-banner{ width: 100%; }
+  }
+
+
+  @media (max-width: 768px) {
+    .burger { display: inline-block; } 
+    nav.nav-links {
+      display: none;
+      position: absolute;
+      right: 12px;
+      top: 60px;          
+      background: #008000;
+      padding: 12px;
+      border-radius: 10px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+      flex-direction: column;
+      min-width: 180px;
+      z-index: 1000;
+    }
+    nav.nav-links.active { display: flex; }
+
+    nav.nav-links a {
+      display: block;
+      padding: 10px 12px;
+      color: #fff;
+      margin: 4px 0;
+      text-align: left;
+    }
+  }
+</style>
+
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="img/photo_5359674248727231556_m.jpg" alt="Логотип">
+      <h1>Dastarkhan</h1>
+    </div>
+    <button class="burger" aria-label="Меню">
+      <i class="fa fa-bars" style="justify-content: right;"></i>
+    </button>
+    <nav>
+      <a href="index.html">Главная</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="sales.html" class="active">Скидки</a>
+      <a href="Delivery.html">Доставка</a>
+      <a href="reviews.html">Отзывы</a>
+      <a href="contacts.html">Контакты</a>
+      <a href="questions.html">Вопросы</a>
+      <a href="auth.html">Авторизация</a>
+    </nav>
+    <button id="themeToggle" class="theme-toggle">
+      <i class="fas fa-moon">🌙</i>
+    </button>
+  </header>
+
+  <main>
+    <h2>Скидки и акции</h2>
+    
+    <div class="subscribe-section" >
+      <img src="img/gif2.gif"  height="auto" style="display: flex; justify-self: center;">
+      <p>
+      <button id="subscribeBtn" class="subscribe-btn" style="display: flex; justify-self: center;">
+        <i class="fas fa-bell"></i> Подписаться на больше скидок
+      </button> </p>
+      <div id="subscribeMessage" class="subscribe-message"></div>
+    </div>
+
+    <section>
+      <h2 style="display:flex; align-items:center">Фруктовые скидки недели</h2>
+      <div class="content-wrapper">
+        <aside class="sidebar">
+          <h3>Фильтр скидок</h3>
+          <ul>
+            <li><a href="#" data-filter="10">До -10%</a></li>
+            <li><a href="#" data-filter="30">До -30%</a></li>
+            <li><a href="#" data-filter="50">До -50%</a></li>
+            <li><a href="#" data-filter="super">Супер акции</a></li>
+          </ul>
+        </aside>
+
+        <div class="main-content">
+          <div class="sale-banner sale-orange" data-discount="20">
+            <div>
+              <h3>Бананы -20%</h3>
+              <p><s>1180 ₸/кг</s> <strong>945 ₸/кг</strong></p>
+            </div>
+            <img src="img/banana.webp" alt="Бананы">
+          </div>
+
+          <div class="sale-banner sale-red" data-discount="25">
+            <div>
+              <h3>Яблоки -25%</h3>
+              <p><s>850 ₸/кг</s> <strong>680 ₸/кг</strong></p>
+            </div>
+            <img src="img/apples.jpg" alt="Яблоки">
+          </div>
+
+          <div class="sale-banner sale-green" data-discount="15">
+            <div>
+              <h3>Арбузы -15%</h3>
+              <p><s>880 ₸/кг</s> <strong>705 ₸/кг</strong></p>
+            </div>
+            <img src="img/watermelon.avif" alt="Арбузы">
+          </div>
+
+          <div class="sale-banner sale-purple" data-discount="18">
+            <div>
+              <h3>Апельсины -18%</h3>
+              <p><s>1100 ₸/кг</s> <strong>900 ₸/кг</strong></p>
+            </div>
+            <img src="img/oranges.jpg" alt="Апельсины">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <h3>Специальные предложения</h3>
+    <div class="products-container">
+      <div class="product">
+        <h4>Набор для завтрака</h4>
+        <p>Молоко + Хлеб + Сыр + Колбаса</p>
+        <p class="price"><span class="old-price">3 850 KZT</span> 2 990 KZT</p>
+        <form class="product-form">
+          <input type="number" min="1" value="1">
+          <button type="submit">В корзину</button>
+        </form>
+      </div>
+
+      <div class="product">
+        <h4>Семейный обед</h4>
+        <p>Курица + Рис + Овощи + Хлеб</p>
+        <p class="price"><span class="old-price">5 750 KZT</span> 4 590 KZT</p>
+        <form class="product-form">
+          <input type="number" min="1" value="1">
+          <button type="submit">В корзину</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="subscription-form-container">
+      <h3>Подпишитесь на уведомления о скидках</h3>
+      <div id="subscriptionForm" class="subscription-form">
+      </div>
+    </div>
+
+    <div class="sale-timer-section">
+      <button id="saleTimerBtn" class="sale-timer-btn" style="display: flex; justify-self: center;">
+        <i class="fas fa-clock"></i> До конца акции осталось
+      </button>
+      <div id="timeDisplay" class="time-display" style="display: flex; justify-self: center;"></div>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>Сделано командой: Nurislam, Shinaray, Aidos, Akerke</p>
+  </footer>
+  <script src="shinaray.js"></script>
+</body>
+</html>
